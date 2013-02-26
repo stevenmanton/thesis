@@ -1,0 +1,106 @@
+% This sample file is dedicated to the public domain.
+\documentclass[12pt]{myucthesis}
+
+%\nofiles
+% The above command prevents latex from writing its auxiliary
+% files. This is useful if you want to manually tweak them before you
+% generate your final PDF.
+
+
+% Page layout. The fancyhdr package may complain about the need for a
+% larger headheight, depending on how long chapter titles are; if left
+% unspecified in the geometry setup, it defaults to 12pt. The
+% "showframe" option causes the geometry package (version >= 5.0) to
+% show a frame around the margins on every page, which is great for
+% checking that you don't overflow anywhere.
+
+%\usepackage[letterpaper,includehead,margin=1in,headheight=15pt,showframe]{geometry}
+\usepackage[letterpaper,includehead,margin=1in,headheight=15pt]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\lhead[\fancyplain{\thepage}{\thepage}]{\fancyplain{}{\scshape\rightmark}}
+\rhead[\fancyplain{}{\scshape\leftmark}]{\fancyplain{\thepage}{\thepage}}
+\chead{}
+\cfoot{}
+\lfoot{}
+\rfoot{}
+
+
+% Bibliography stuff:
+
+\newcommand{\newblock}{\par} % need this for some natbib internal bug
+\usepackage[numbers,sort&compress]{natbib}
+%\citestyle{aa}
+%\bibliographystyle{apsrev}
+%\bibliographystyle{yahapj}
+%\bibliographystyle{unsrtnat}
+\bibliographystyle{dhsthesis2}
+\setlength{\bibsep}{0ex} % single-space entries
+\def\bibpreamble{\addcontentsline{toc}{chapter}{Bibliography}} % get a good TOC entry
+
+
+% Other setup:
+
+\usepackage[T1]{fontenc} % see http://tinyurl.com/67zdxwf
+%\usepackage{microtype} % various subtle typographic improvements
+
+% hyperref, see: http://www.tug.org/applications/hyperref/ftp/doc/manual.html
+\usepackage[colorlinks,urlcolor=blue,citecolor=blue,linkcolor=blue,pdfusetitle,bookmarksnumbered]{hyperref}
+
+\usepackage{pdflscape} % allows landscape-oriented figures with PDF page rotation
+\usepackage{aasmacros,amsmath,amssymb,graphicx}
+\usepackage{mydeluxetable} % deluxetable customized to play well with ucthesis
+
+
+\begin{document}
+\ssp % single spacing
+\hypersetup{pageanchor=true}
+\include{setup}
+\maketitle
+\copyrightpage
+
+\begin{abstract}
+My work is awesome. Give me a Ph.D.
+\end{abstract}
+
+\hypersetup{pageanchor=false}
+\begin{frontmatter}
+
+\begin{dedication}
+\null\vfil
+{\large
+\begin{center}
+I dedicate this dissertation to graduate students everywhere.
+\end{center}}
+\null\vfil
+\end{dedication}
+
+\pdfbookmark[0]{Table of Contents}{toc_bookmark} % manually add bookmark for ToC
+\tableofcontents
+\listoffigures % optional
+\listoftables % optional
+
+% If using code.sty, can also add:
+%% \listofcodes
+%% \addcontentsline{toc}{chapter}{List of Code Examples}
+
+\begin{acknowledgements}
+Too bad nobody helped me.
+\end{acknowledgements}
+\end{frontmatter}
+
+\newcommand{\Vsquid}{V_\text{SQUID}}
+\newcommand{\Vfll}{V_\text{FLL}}
+\newcommand{\Iloop}{I_\text{loop}}
+
+\include{intro/intro}
+%\include{dephasing/dephasing}
+%\include{msfn/msfn}
+\include{experimental/experimental}
+%\include{Tscaling/Tscaling}
+%\include{Gscaling/Gscaling}
+%\include{materials/materials}
+%\include{conclusion/conclusion}
+
+\bibliography{thesis}
+\end{document}
