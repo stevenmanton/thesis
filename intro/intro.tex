@@ -6,11 +6,23 @@ Abstract.
 
 \section{Introduction}
 
-This is some stuff about science. I feel a strange compulsion to cite \citep{williams12}.
 
-\section{Feelings on My Thesis}
 
-%\input{intro/processed.tex}
+\section{Symmetric and antisymmetric critical current noise}
+
+[The following needs a lot of work!] The symmetric component of critical current noise $S_{I_c,\text{sym}}$ is independent of flux bias. However, because of the antisymmetric component $S_{I_c,\text{asym}}$, which couples to the SQUID as a flux and therefore adds noise proportional the the flux sensitivity of the SQUID, the magnitude of the noise can vary with flux bias:
+\begin{align}\label{fig:experimental:SIasym}
+\frac{\partial\Iloop}{\partial I_{c,\text{asym}}} = L^2 %
+\left(\frac{\partial \Iloop}{\partial \Phi_m}\right)^2,
+\end{align}
+where $L$ is the self-inductance of the SQUID. Because the maximum $\partial\Iloop/\partial_m$ varies roughly as $I_c/\Phi_0$ for our devices, which have $\beta_L \equiv LI_c/\Phi_0 \lesssim 0.5$, Eq.~\eqref{fig:experimental:SIasym} can be approximated as
+\begin{align}\label{fig:experimental:SIasym}
+\left(\frac{\partial\Iloop}{\partial I_{c,\text{asym}}}\right)_{\text{max}} \approx %
+\left(\frac{\beta_L\Phi_0}{I_c}\right)^2 %
+\left(\frac{I_c}{\Phi_0}\right)^2 %
+\approx \beta_L^2.
+\end{align}
+Because critical current variations within the junctions are independent, $S_{I_c,\text{sym}} = S_{I_c,\text{asym}}$. Therefore, we see that the maximum noise contribution due to asymmetric critical current variations is of the same order of magnitude as, or much lower than, that of symmetric variations. Furthermore, because the magnitude of $S_{I_c,\text{asym}}$ varies with SQUID inductance, which is often difficult to measure, it is difficult to know accurately.
 
 \section*{Acknowledgments}
 
