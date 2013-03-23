@@ -89,9 +89,14 @@ Too bad nobody helped me.
 \end{acknowledgements}
 \end{frontmatter}
 
+\newcommand{\vartsub}[2]{#1_\text{#2}{}}
 \newcommand{\Vsquid}{V_\text{SQUID}}
 \newcommand{\Vfll}{V_\text{FLL}}
 \newcommand{\Iloop}{I_\text{loop}}
+
+\newcommand{\Ntc}{N_\text{tc}} % number of points in time capture
+\newcommand{\Navg}{\vartsub{N}{avg}} % number of averages in averaged FFT, i.e. number of time capture segments
+\newcommand{\fcut}{\vartsub{f}{cut}}
 
 \include{intro/intro}
 \include{dephasing/dephasing}
@@ -102,5 +107,10 @@ Too bad nobody helped me.
 %\include{materials/materials}
 %\include{conclusion/conclusion}
 
+\appendix
+\include{stitch_spec/stitch_spec}
+
+
 \bibliography{thesis}
+%\bibliography{santon_refs}
 \end{document}
