@@ -60,7 +60,7 @@
 \copyrightpage
 
 \begin{abstract}
-My work is awesome. Give me a Ph.D.
+An abstract.
 \end{abstract}
 
 \hypersetup{pageanchor=false}
@@ -85,18 +85,11 @@ I dedicate this dissertation to graduate students everywhere.
 %% \addcontentsline{toc}{chapter}{List of Code Examples}
 
 \begin{acknowledgements}
-Too bad nobody helped me.
+An acknowledgement.
 \end{acknowledgements}
 \end{frontmatter}
 
-\newcommand{\vartsub}[2]{#1_\text{#2}{}}
-\newcommand{\Vsquid}{V_\text{SQUID}}
-\newcommand{\Vfll}{V_\text{FLL}}
-\newcommand{\Iloop}{I_\text{loop}}
-
-\newcommand{\Ntc}{N_\text{tc}} % number of points in time capture
-\newcommand{\Navg}{\vartsub{N}{avg}} % number of averages in averaged FFT, i.e. number of time capture segments
-\newcommand{\fcut}{\vartsub{f}{cut}}
+\include{newcommand_defs} % separate file for the definition of new commands
 
 \include{intro/intro}
 \include{dephasing/dephasing}
@@ -109,6 +102,7 @@ Too bad nobody helped me.
 
 \appendix
 \include{stitch_spec/stitch_spec}
+\include{fitting/fitting}
 
 
 \bibliography{thesis}

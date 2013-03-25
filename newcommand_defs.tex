@@ -1,0 +1,15 @@
+% This file contains new commands that I use throughout the thesis. In order to keep consistent notation, it's often better to define quantities as new commands, especially if there's a chance of changing something halfway through, for instance changing V_FLL to V_fll.
+
+
+% Command to generate script variable with text subscript. The trailing empty brackets {} are so you can follow the command with an additional subscript without LaTeX throwing a double-subscript error, e.g. \Navg_\text{,max}
+\newcommand{\vartsub}[2]{#1_\text{#2}{}}
+
+\newcommand{\SPhiOneHz}{S_\Phi(1~\text{Hz})}
+
+\newcommand{\Vsquid}{V_\text{SQUID}} % Voltage across measured SQUID
+\newcommand{\Vfll}{V_\text{FLL}}     % Voltage output of flux-locked loop
+\newcommand{\Iloop}{I_\text{loop}}   % Current through input coil (equivalently, around the big loop)
+
+\newcommand{\Ntc}{N_\text{tc}} % number of points in time capture
+\newcommand{\Navg}{\vartsub{N}{avg}} % number of averages in averaged FFT, i.e. number of time capture segments
+\newcommand{\fcut}{\vartsub{f}{cut}}

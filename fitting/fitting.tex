@@ -1,0 +1,28 @@
+\chapter{Fitting spectra}
+\label{App:fitting}
+
+In the majority of measurements of flux noise in SQUIDs, the flux noise $S_\Phi(f)$ is observed to scale with frequency as $1/f^\alpha$ with little or no deviation. As such, $S_\Phi(f)$ is well characterized by just two parameters: a noise magnitude and slope. For historical reasons, the spectral density at 1~Hz has become synonymous with the noise magnitude~\citep{Koch:JLTP:1983}. To determine the values of $\alpha$ and $\SPhiOneHz$, which we denote as $A^2$, we fit a measured spectrum $S_{\Phi,\text{meas}}$ to an assumed functional dependence. Here, $S_{\Phi,\text{meas}}$ is expressed in terms of equivalent flux in the measured SQUID. Because typical measurements of flux noise in SQUIDs include a non-negligible white noise contribution from the resistive shunts across the junctions, a third fitting term $C^2$, the magnitude of the white noise, is included in the functional dependence:
+\begin{align}\label{eqn:SPhi_func_form}
+S_{\Phi,\text{meas}}(f) = S_\Phi(f) + C^2 = \frac{A^2}{(f/1~\text{Hz})^\alpha} + C^2.
+\end{align}
+Conceptually, the fitting process is quite straightforward. Nonetheless, there are a number of issues one must consider in order to implement a routine that programmatically generates high quality fits, which we now review.
+
+In general, a nonlinear curve fit of a function $g(x,\beta)$ to $N$ pairs of independent and dependent data points $(x_i,y_i)$ is accomplished via a nonlinear regression routine, which seeks to optimize the fit coefficients $\beta$ such that the sum of the squared residuals
+\begin{align}\label{eqn:sum_squared_residuals}
+\Lambda(\beta) = \sum_{i=1}^N [y_i - g(x_i,\beta)]^2
+\end{align}
+is minimized. In our case, $g(x,\beta)$ is defined by Eqn.~\eqref{eqn:SPhi_func_form}, where the three components of $\beta$ are $A^2$, $\alpha$, and $C^2$, and $y$ and $x$ are defined by the spectral densities and frequencies, respectively, of the spectrum we are fitting. Unlike linear regression routines, nonlinear regression routines are iterative and can only guarantee that solutions are local, not global, minima. This fact implies that an initial guess of the fit coefficients must be provided to the routine. Furthermore, if the guess is poor the routine may converge to local minimum that may represent a poor fit.
+
+To supply the routine with an accurate initial guess, we have developed a robust routine that works well with our flux noise data. We rely on the empirical observation that it is often easier to initially guess a single parameter at a time, holding the others fixed. We first guess $C^2$ to equal the spectral density at the highest frequency of the measured spectrum. Then, holding $C^2$ fixed, we perform a nonlinear regression for the values of $A^2$ and $\alpha$. Using these values for $C^2$, $A^2$, and $\alpha$ as the initial guesses, we perform a nonlinear regression for all three simultaneously, the solution of which we keep as our final fit coefficients.
+
+The concept of minimizing $\Lambda(\beta)$ raises two more issues. First, because $S_\Phi(f) \propto 1/f^\alpha$, the magnitudes of $y_i$ and $g(x_i,\beta)$ can vary several orders of magnitude. Therefore, the residuals from data at lower frequencies, which tend to be the largest, will provide the dominant contribution to $\Lambda(\beta)$. This, in turn, will cause the routine to yield a fit that is highly accurate at low frequencies at the cost of ``accuracy'' at high frequencies. In this situation, we refer to an accurate fit in the intuitive sense of a curve that visually approximates the measured spectrum when plotted on a log-log scale. 
+
+Second, because the frequency spacing $df$ is constant in an unstitched spectrum, the density of points increases linearly with frequency when plotted on a log scale; that is, the number of points per octave is proportional to its center frequency. This effect increases the influence of higher frequency data and overly favors an accurate fit at high frequencies.
+
+Unfortunately, these two issues, which produce opposite effects, cancel each other only for spectra that vary as $1/f$. In this situation the spectral density and, correspondingly, the variance scale as $1/f$, while the density of the log frequency points $[\log(f_{i+1}) - \log(f_i)]^{-1}$ increases as $f$. Since our measured spectra rarely vary as $1/f$, we handle the previous two issues in the following manner. To ensure that the spacing between log frequency points is roughly constant ($\log(f_{i+1}) - \log(f_i) \approx \text{constant}$), we use the stitched spectrum explained in Appendix~\ref{App:stitch_spec}. Here, the number of averaged FFTs used to compute a particular frequency range of the stitched spectrum is roughly proportional to center frequency of the range. By Eqn.~\eqref{eqn:df_Navg_def}, $df \propto \Navg \propto f$ so that $\log(f_{i+1}) - \log(f_i) = \log(1 + df/f_i) \approx \text{constant}$, which addresses the overrepresentation of high frequencies in an unstitched spectrum. Next, by fitting the logarithm of the spectra, we ensure that low frequencies are not overrepresented. That is, we perform a nonlinear regression such that
+\begin{align}\label{eqn:sum_squared_residuals_log}
+\Lambda'(\beta) = \sum_{i=1}^N [\log(y_i) - \log(g(x_i,\beta))]^2
+\end{align}
+is minimized. We have found that this method of fitting the logarithm of stitched spectra to be highly reliable and have used it for all fits presented in this thesis.
+
+[@@@ Lorentzian term ]
