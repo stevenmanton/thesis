@@ -1,0 +1,11 @@
+function thesisfigs
+
+if true
+   dt = 1;
+   yw = rand(2^10,1);
+   
+   [fw Sw] = fftSD(dt,y);
+   [fw Sw_avg] = fftSD(dt,y,'avgs',4);
+end
+
+end

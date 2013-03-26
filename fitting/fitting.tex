@@ -15,7 +15,7 @@ is minimized. In our case, $g(x,\beta)$ is defined by Eqn.~\eqref{eqn:SPhi_func_
 
 To supply the routine with an accurate initial guess, we have developed a robust routine that works well with our flux noise data. We rely on the empirical observation that it is often easier to initially guess a single parameter at a time, holding the others fixed. We first guess $C^2$ to equal the spectral density at the highest frequency of the measured spectrum. Then, holding $C^2$ fixed, we perform a nonlinear regression for the values of $A^2$ and $\alpha$. Using these values for $C^2$, $A^2$, and $\alpha$ as the initial guesses, we perform a nonlinear regression for all three simultaneously, the solution of which we keep as our final fit coefficients.
 
-The concept of minimizing $\Lambda(\beta)$ raises two more issues. First, because $S_\Phi(f) \propto 1/f^\alpha$, the magnitudes of $y_i$ and $g(x_i,\beta)$ can vary several orders of magnitude. Therefore, the residuals from data at lower frequencies, which tend to be the largest, will provide the dominant contribution to $\Lambda(\beta)$. This, in turn, will cause the routine to yield a fit that is highly accurate at low frequencies at the cost of ``accuracy'' at high frequencies. In this situation, we refer to an accurate fit in the intuitive sense of a curve that visually approximates the measured spectrum when plotted on a log-log scale. 
+The concept of minimizing $\Lambda(\beta)$ raises two more issues. First, because $S_\Phi(f) \propto 1/f^\alpha$, the magnitudes of $y_i$ and $g(x_i,\beta)$ can vary several orders of magnitude. Therefore, the residuals from data at lower frequencies, which tend to be the largest, will provide the dominant contribution to $\Lambda(\beta)$. This, in turn, will cause the routine to yield a fit that is highly accurate at low frequencies at the cost of ``accuracy'' at high frequencies. In this situation, we refer to an accurate fit in the intuitive sense of a curve that visually approximates the measured spectrum when plotted on a log-log scale.
 
 Second, because the frequency spacing $df$ is constant in an unstitched spectrum, the density of points increases linearly with frequency when plotted on a log scale; that is, the number of points per octave is proportional to its center frequency. This effect increases the influence of higher frequency data and overly favors an accurate fit at high frequencies.
 
@@ -25,4 +25,4 @@ Unfortunately, these two issues, which produce opposite effects, cancel each oth
 \end{align}
 is minimized. We have found that this method of fitting the logarithm of stitched spectra to be highly reliable and have used it for all fits presented in this thesis.
 
-[@@@ Lorentzian term ]
+[@@@ Lorentzian term?]
